@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         List<Car> cars = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             cars.add(CarsFactory.getCar());
         }
         System.out.println("Init list of cars:");
@@ -17,15 +17,21 @@ public class Main {
             System.out.println(entry);
         }
 
-        Map<UUID, Car> carsFilter = cars.stream().filter(car ->
+        List<Car> listFilteredCars = cars.stream().filter(car ->
                 (car.getBrand().equals(AutoBrand.Audi) ||
                         car.getBrand().equals(AutoBrand.Tesla)) &&
                         car.getYear() > 2018 && car.getMileage() < 40000).
-                sorted(Comparator.reverseOrder()).limit(3).
+                sorted(Comparator.reverseOrder()).
+                collect(Collectors.toList());
+
+        long countFilteredCars = listFilteredCars.size();
+
+        Map<UUID, Car> mapFilteredCars = listFilteredCars.stream().
+                skip(countFilteredCars - 3).
                 collect(Collectors.toMap(car -> car.getId(), car -> car));
 
         System.out.println("\n\rMap elements after filtering of stream:");
-        for (Map.Entry<UUID, Car> entry : carsFilter.entrySet()) {
+        for (Map.Entry<UUID, Car> entry : mapFilteredCars.entrySet()) {
             System.out.println(entry.getValue());
         }
     }
