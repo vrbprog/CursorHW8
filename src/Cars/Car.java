@@ -57,13 +57,12 @@ public class Car implements Comparable<Car> {
         return year == car.year &&
                 mileage == car.mileage &&
                 price == car.price &&
-                Objects.equals(id, car.id) &&
                 brand == car.brand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brand, year, mileage, price);
+        return Objects.hash(brand, year, mileage, price);
     }
 
     @Override

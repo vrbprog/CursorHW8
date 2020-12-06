@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         List<Car> cars = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             cars.add(CarsFactory.getCar());
         }
         System.out.println("Init list of cars:");
@@ -20,7 +20,7 @@ public class Main {
         Map<UUID, Car> carsFilter = cars.stream().filter(car ->
                 (car.getBrand().equals(AutoBrand.Audi) ||
                         car.getBrand().equals(AutoBrand.Tesla)) &&
-                        car.getYear() < 2018 && car.getMileage() < 40000).
+                        car.getYear() > 2018 && car.getMileage() < 40000).
                 sorted(Comparator.reverseOrder()).limit(3).
                 collect(Collectors.toMap(car -> car.getId(), car -> car));
 
