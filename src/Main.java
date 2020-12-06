@@ -1,3 +1,4 @@
+import Cars.AutoBrand;
 import Cars.Car;
 import Cars.CarsFactory;
 
@@ -17,8 +18,8 @@ public class Main {
         }
 
         Map<UUID, Car> carsFilter = cars.stream().filter(car ->
-                (car.getBrand().toString().equals("Audi") ||
-                        car.getBrand().toString().equals("Tesla")) &&
+                (car.getBrand().equals(AutoBrand.Audi) ||
+                        car.getBrand().equals(AutoBrand.Tesla)) &&
                         car.getYear() < 2018 && car.getMileage() < 40000).
                 sorted().limit(3).collect(Collectors.toMap(car -> car.getId(), car -> car));
 
