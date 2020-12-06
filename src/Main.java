@@ -21,7 +21,8 @@ public class Main {
                 (car.getBrand().equals(AutoBrand.Audi) ||
                         car.getBrand().equals(AutoBrand.Tesla)) &&
                         car.getYear() < 2018 && car.getMileage() < 40000).
-                sorted().limit(3).collect(Collectors.toMap(car -> car.getId(), car -> car));
+                sorted(Comparator.reverseOrder()).limit(3).
+                collect(Collectors.toMap(car -> car.getId(), car -> car));
 
         System.out.println("\n\rMap elements after filtering of stream:");
         for (Map.Entry<UUID, Car> entry : carsFilter.entrySet()) {

@@ -68,6 +68,6 @@ public class Car implements Comparable<Car> {
 
     @Override
     public int compareTo(Car compCar) {
-        return Integer.compare(this.getPrice(), compCar.getPrice());
+        return Integer.compare(compCar.getPrice(), this.getPrice());
     }
 }
